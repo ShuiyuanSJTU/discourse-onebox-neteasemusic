@@ -1,6 +1,6 @@
 # name: discourse-onebox-neteasemusic
 # about: 为 Discourse Onebox 增加了网易云支持
-# version: 0.1.0
+# version: 0.1.1
 # authors: pangbo13
 # url: https://github.com/pangbo13/discourse-onebox-neteasemusic
 
@@ -49,7 +49,7 @@ class Onebox::Engine::NeteasemusicOnebox
             marginheight="0" 
             width=330 
             height=450 
-            src="//music.163.com/outchain/player?type=1&id=#{item_id}&auto=0&height=430">
+            src="https://music.163.com/outchain/player?type=1&id=#{item_id}&auto=0&height=430">
             </iframe>
             HTML
         when 2
@@ -61,7 +61,7 @@ class Onebox::Engine::NeteasemusicOnebox
             marginheight="0" 
             width=330 
             height=86 
-            src="//music.163.com/outchain/player?type=2&id=#{item_id}&auto=0&height=66">
+            src="https://music.163.com/outchain/player?type=2&id=#{item_id}&auto=0&height=66">
             </iframe>
             HTML
         end

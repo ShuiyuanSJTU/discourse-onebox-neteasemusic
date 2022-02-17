@@ -1,6 +1,6 @@
 # name: discourse-onebox-neteasemusic
 # about: 为 Discourse Onebox 增加了网易云支持
-# version: 0.1.1
+# version: 0.1.2
 # authors: pangbo13
 # url: https://github.com/pangbo13/discourse-onebox-neteasemusic
 
@@ -13,27 +13,29 @@ class Onebox::Engine::NeteasemusicOnebox
     matches_regexp(/^https?:\/\/music\.163\.com\/(#\/)?(album|song)(\?id=|\/)([0-9]+)(&.*)?\/?$/)
     always_https
 
+    def uri_s
+        @@uri_s ||= uri.to_s
+
     def item_type
-        uri_s = uri.to_s
+        return @@item_id if @@item_id
         if uri_s.match(/song/)
-            return 2
+            @@item_id = 2
         elsif uri_s.match(/album/)
-            return 1
+            @@item_id = 1
         end
-        nil
+        @@item_id
     rescue
         nil
     end
 
     def item_id
-        uri_s = uri.to_s
+        return @@item_id if @@item_id
         if uri_s.match(/\?id=/)
-            match = uri_s.match(/\?id=([0-9]+)/)
-            return match[1]
+            @@item_id = uri_s.match(/\?id=([0-9]+)/)[1]
         else
-            match = uri_s.match(/(album|song)\/([0-9]+)/)
-            return match[2]
+            @@item_id = uri_s.match(/(album|song)\/([0-9]+)/)[2]
         end
+        @@item_id
     rescue
         nil
     end
